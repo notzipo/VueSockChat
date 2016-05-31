@@ -4,7 +4,7 @@ var myExtras = require('./myExtras.js');
 //initial server by Express port 8080
 var express = require('express');
 var app = express(); app.use(express.static(__dirname + '/public'));
-var server = require('http').Server(app); server.listen(8080);
+var server = require('http').Server(app); server.listen(80);
 
 //initial socket.io
 var io = require('socket.io')(server);
