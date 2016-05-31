@@ -7,4 +7,4 @@ npm install
 node chat-server.js
 
 
-open browser http://localhost:8080
+open browser http://localhost
