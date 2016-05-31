@@ -1,4 +1,12 @@
 {
+  "name": "VueSockChat",
+  "version": "1.0.0",
+  "description": "node+express vue+socket",
+  "author": "notzipo <notzipo@msn.com>",
+  "main": "chat-server.js",
+  "scripts": {
+    "start": "node chat-server.js"
+  },
   "dependencies": {
     "express": "^4.13.4",
     "socket.io": "^1.4.6"
