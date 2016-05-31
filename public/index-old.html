@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>VueSocketIO-chat</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.6/socket.io.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.min.js"></script>
+</head>
+
+<body style="background: #676767;">
+<div class="container">
+<br/>
+
+<div id="login" style="background: white; padding: 15px; border-radius: 15px;">
+	<form style="text-align: center;" v-on:submit="startChat">
+		<input type="text" id="username" v-model="username" placeholder="enter your name" class="text"><br/><br/>
+		<button type="submit" class="btn btn-primary">
+			<span class="glyphicon glyphicon-user" aria-hidden="true"></span><br/>Start Chat
+		</button>
+	</form>
+</div>
+
+<div id="chat" style="display: none; height: 200px;">
+	<div class="panel panel-default">
+	  <div class="panel-heading"><h3 class="panel-title">{{appname}}</h3></div>
+
+	  <div class="panel-heading">
+	  	<span v-for="u in users" class="label label-default" style="margin-right: 3px;">
+	  		{{u.username}}
+	  	</span>
+	  	<span class="pull-right">
+	  		<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+	  		<span class="badge">{{serverStatus.numberOfmember}}</span>
+	  	</span>
+	  </div>
+
+	  <div class="panel-body" style="height: 300px; overflow-y: scroll;" id="message_div">
+		<ul id="messages" class="list-unstyled">
+			<li v-for="m in messages">
+				<div v-if="m.username != 'sys' &&  m.username != username">
+					<b style="color: green;">{{m.username}}:</b>
+					{{m.text}}
+				</div>
+				<div v-if="m.username != 'sys' &&  m.username == username">
+					<b style="color: blue;">{{m.username}}:</b>
+					{{m.text}}
+				</div>
+				<div v-if="m.username == 'sys'" style="color: gray; width:100%; text-align: center; font-size: 0.90em;">
+					<span class="label" style="background-color: rgba(0, 0, 0, 0.25);">{{m.text}}</span>
+				</div>
+				
+			</li>
+		</ul>
+	  </div>
+	  <div class="panel-footer">
+		<form v-on:submit="send" class="footer" class="form-inline">
+
+
+    <div class="input-group">
+  	  <span class="input-group-addon" id="basic-addon1">{{username}}</span>
+      <input v-model="message" type="text" class="form-control" placeholder="text..." aria-describedby="basic-addon1">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" type="submit">
+	        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+        	Send
+        </button>
+      </span>
+    </div><!-- /input-group -->
+
+		</form>
+	  </div>
+	</div>
+</div>
+</div>
+<script type="text/javascript" src="chat-client.js"></script>
+</body>
+</html>

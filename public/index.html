@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>VueSocketIO-chat</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.6/socket.io.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.min.js"></script>
+	<script src="http://momentjs.com/downloads/moment.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="app.css">
+</head>
+
+<body>
+<div class="container">
+
+<div class="loginPanel" v-show="!isLogin">
+	<form style="text-align: center;" v-on:submit="doLogin">
+		<button type="submit" class="btn btn-primary">
+			<span class="glyphicon glyphicon-user" aria-hidden="true"></span><br/>Start Chat
+		</button><br/><br/>
+		<input type="text" v-model="username" placeholder="enter your name" class="text">
+	</form>
+</div>
+
+<div style="display:none; height: 200px;" v-show="isLogin">
+	<div class="panel panel-default">
+	  <div class="panel-heading"><h3 class="panel-title">{{channelName}}</h3></div>
+
+	  <div class="panel-heading">
+	  	<span v-for="u in users" class="label label-default" style="margin-right: 3px;">
+	  		{{u.username}}
+	  	</span>
+	  	<span class="pull-right">
+	  		<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+	  		<span class="badge">{{serverStatus.numberOfmember}}</span>
+	  	</span>
+	  </div>
+
+	  <div class="panel-body" id="message_div">
+		<ul id="messages" class="list-unstyled" class="messages">
+			<li v-for="m in messages" style="clear: both;">
+				<div v-if="m.username != 'sys' &&  m.username != username">
+					<div class="head">
+						<b style="color: green;">{{m.username}}:</b>
+						{{moment(new Date(m.t)).startOf('hour').fromNow()}}
+					</div>
+					<div class="message">{{m.text}}</div>
+				</div>
+
+				<div v-if="m.username != 'sys' &&  m.username == username">
+					<div class="head-R">
+						{{new Date(m.t).getHours()}}:{{new Date(m.t).getMinutes()}}
+
+
+						<b style="color: blue;">:{{m.username}}</b>
+					</div>
+					<div class="message-R">{{m.text}}</div>
+				</div>
+
+				<div v-if="m.username == 'sys'" class="sysmessageDiv">
+					<span class="label sysmessage">{{m.text}}</span>
+				</div>
+			</li>
+		</ul>
+	  </div>
+	  <div class="panel-footer">
+		<form v-on:submit="send" class="footer" class="form-inline">
+
+
+    <div class="input-group">
+  	  <span class="input-group-addon" id="basic-addon1">{{username}}</span>
+      <input v-model="message" type="text" class="form-control" placeholder="text..." aria-describedby="basic-addon1">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" type="submit">
+	        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+        	Send
+        </button>
+      </span>
+    </div><!-- /input-group -->
+
+		</form>
+	  </div>
+	</div>
+</div>
+</div>
+<script type="text/javascript" src="chat-client.js"></script>
+</body>
+</html>

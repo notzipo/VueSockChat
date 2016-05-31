@@ -1,0 +1,7 @@
+{
+	"rtus": [
+		{"name": "UDA", "status": "Online"},
+		{"name": "UDB", "status": "Offline"},
+		{"name": "UDC", "status": "Offline"},
+	]
+}

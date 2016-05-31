@@ -1,0 +1,76 @@
+body{
+	background: #676767;
+}
+.container{
+	padding: 15px;
+}
+
+.loginPanel{
+	background: white; padding: 15px; border-radius: 15px;
+}
+.sysmessageDiv{
+	color: gray; width:100%; text-align: center; font-size: 0.90em;
+}
+.sysmessage{
+	background-color: rgba(0, 0, 0, 0.25);
+}
+.panel-body{
+	height: 250px; overflow-y: scroll;
+}
+.message{
+    margin-top: 10px;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 3px;
+    padding: 5px;
+    line-height: 25px;
+    max-width: 500px;
+    min-width: 150px;
+    word-wrap: break-word;
+    position: relative;
+    background-color: #62bf6e;
+    float: left;
+}
+.message:before{
+    left: 16px;
+    border-bottom-color: #62bf6e;
+    content: '';
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    top: -12px;
+    border-bottom: 12px solid #62bf6e;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
+.message-R{
+    margin-top: 10px;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 3px;
+    padding: 5px;
+    line-height: 25px;
+    max-width: 500px;
+    min-width: 150px;
+    word-wrap: break-word;
+    position: relative;
+    background-color: #7bc4ef;
+    float: right;
+    clear: both;
+}
+.message-R:before{
+    right: 16px;
+    border-bottom-color: #7bc4ef;
+    content: '';
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    top: -12px;
+    border-bottom: 12px solid #7bc4ef;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
+.head-R{
+	float: right;
+	right: 16px;
+}
